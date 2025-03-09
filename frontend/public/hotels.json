@@ -1,0 +1,9 @@
+[
+    { "id": 1, "name": "Hotel Taj","price_per_night":254, "location": "Mumbai" },
+    { "id": 2, "name": "The Oberoi","price_per_night":450, "location": "Delhi" },
+    { "id": 3, "name": "Hotel Taj","price_per_night":254, "location": "Mumbai" },
+    { "id": 4, "name": "The Oberoi","price_per_night":450, "location": "Delhi" },
+    { "id": 5, "name": "Hotel Taj","price_per_night":254, "location": "Mumbai" },
+    { "id": 6, "name": "The Oberoi","price_per_night":450, "location": "Delhi" }
+  ]
+  
