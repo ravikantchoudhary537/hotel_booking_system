@@ -6,7 +6,7 @@ const API_URL = "http://localhost:5000/api";
 
 const getAuthHeader = () => {
   const token = localStorage.getItem("token");
-  console.log("Token mil gya ya mhi ",token)
+  // console.log("Token mil gya ya mhi ",token)
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
 

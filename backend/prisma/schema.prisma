@@ -33,8 +33,9 @@ model Booking {
 }
 
 model CheckIn {
-  id      Int    @id @default(autoincrement())
-  bookingId Int @unique
-  aadhaar  String
-  booking  Booking @relation(fields: [bookingId], references: [id])
+  id        Int    @id @default(autoincrement())
+  bookingId Int
+  aadhaar   String
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 }
+

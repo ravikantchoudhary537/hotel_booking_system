@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { loginUser } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const Login = () => {
   const [loginData, setLoginData] = useState({
     email: "",
@@ -22,10 +23,11 @@ const Login = () => {
       const response = await loginUser(loginData);
       // console.log("Login API Response:", response);
       login(response.user, response.token);
+      toast.success(`Login successfully!`);
       navigate("/hotels");
     } catch (error) {
       console.error("Login failed", error);
-      alert("Invalid credentials");
+      toast.error(`Invalid credentials`);
     }
   };
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getHotels, bookHotel } from "../services/api";
 import { useAuth } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 export default function Hotels() {
   const [hotels, setHotels] = useState([]);
@@ -9,7 +10,7 @@ export default function Hotels() {
   const [selectedHotel, setSelectedHotel] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
-    aadhaar: "",
+    family_member: "",
     days: "",
   });
 
@@ -47,7 +48,7 @@ export default function Hotels() {
 
   const closeModal = () => {
     setShowModal(false);
-    setFormData({ name: "", aadhaar: "", days: "" });
+    setFormData({ name: "", family_member: "", days: "" });
   };
 
   const handleChange = (e) => {
@@ -55,14 +56,15 @@ export default function Hotels() {
   };
 
   const handleBooking = async () => {
-    if (!user) return alert("Please log in to book a hotel.");
-    if (!formData.name || !formData.aadhaar || !formData.days) {
-      return alert("All fields are required.");
+    if (!user) return toast.warning("Please log in to book a hotel.");
+    if (!formData.name || !formData.family_member || !formData.days) {
+      toast.warning(`All fields are required`);
+      return ;
     }
 
     try {
       await bookHotel({ hotelId: selectedHotel.id });
-      alert("Hotel booked successfully");
+      toast.success(`Hotel "${selectedHotel.name}" booked successfully!`);
       closeModal();
     } catch (error) {
       console.error("Booking failed:", error);
@@ -126,15 +128,15 @@ export default function Hotels() {
 
             <div className="mb-2">
               <label className="block text-gray-600 font-semibold mb-1">
-                Aadhaar Number
+                No of family member
               </label>
               <input
                 type="text"
-                name="aadhaar"
-                value={formData.aadhaar}
+                name="family_member"
+                value={formData.family_member}
                 onChange={handleChange}
                 className="w-full border border-gray-400 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="Enter Aadhaar Number"
+                placeholder="Enter number of family member"
               />
             </div>
 

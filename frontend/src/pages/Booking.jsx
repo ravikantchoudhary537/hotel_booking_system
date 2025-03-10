@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { getHotels, bookHotel } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Booking() {
   const [hotels, setHotels] = useState([]);
@@ -15,13 +16,13 @@ export default function Booking() {
 
   const handleBooking = async () => {
     if (!selectedHotel) {
-      alert("Please select a hotel.");
+      toast.warning("Please select a hotel");
       return;
     }
 
     try {
       await bookHotel({ hotelId: selectedHotel.id });
-      alert(`Hotel "${selectedHotel.name}" booked successfully!`);
+      toast.success(`Hotel "${selectedHotel.name}" booked successfully!`);
       navigate("/checkin");
     } catch (error) {
       console.error("Booking failed", error);
